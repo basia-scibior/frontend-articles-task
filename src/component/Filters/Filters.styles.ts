@@ -7,7 +7,7 @@ export const Container = styled.aside`
 
 export const Title = styled.h4`
   font-size: 22px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   font-weight: 400;
   color: ${blue};
 `;
@@ -15,6 +15,10 @@ export const Title = styled.h4`
 export const FiltersForm = styled.form`
   display: flex;
   flex-direction: column;
+  @media (max-width: 750px) {
+    flex-direction: row;
+    margin-bottom: 10px;
+  }
 `;
 
 export const Filter = styled.label`

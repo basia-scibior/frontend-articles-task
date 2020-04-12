@@ -7,6 +7,7 @@ import {
   Header,
   Title,
   Date,
+  Preamble,
 } from "./Article.styles";
 import placeholderUrl from "../../images/placeholder.jpg";
 import { Moment } from "moment";
@@ -27,7 +28,7 @@ export const Article: FC<ArticleProps> = ({ image, title, date, content }) => {
           <Title>{title}</Title>
           <Date>{date.format("D. MMM YYYY")}</Date>
         </Header>
-        <p>{content}</p>
+        <Preamble>{content}</Preamble>
       </Content>
     </Container>
   );

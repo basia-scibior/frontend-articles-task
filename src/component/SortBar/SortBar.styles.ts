@@ -7,6 +7,11 @@ export const Container = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  @media (max-width: 750px) {
+    height: 30px;
+    position: absolute;
+    right: 50px;
+  }
 `;
 
 export const SortButton = styled.button`
