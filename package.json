@@ -6,14 +6,31 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server",
-    "build": "webpack"
+    "build": "webpack",
+    "format": "prettier --write \"./**/*.{js,md,yml,json,ts,tsx}\"",
+    "lint": "eslint ."
   },
   "author": "STP",
   "license": "UNLICENSED",
   "devDependencies": {
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.6",
+    "@types/styled-components": "^5.0.1",
+    "eslint-plugin-react": "^7.19.0",
     "html-webpack-plugin": "^3.2.0",
+    "typescript": "^3.8.3",
     "webpack": "^4.28.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
+  },
+  "main": "index.js",
+  "repository": "https://github.com/basia-scibior/schibsted-task.git",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "prettier": "^2.0.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.1.0",
+    "ts-loader": "^6.2.2"
   }
 }
