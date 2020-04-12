@@ -1,3 +1,8 @@
+# Getting Started
+
+To run the application in the development environment, run
+`yarn dev` 🐣
+
 # Schibsted frontend task app
 
 This is a very basic npm project with default webpack setup.
