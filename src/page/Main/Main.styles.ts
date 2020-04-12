@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { blue, grey } from "../../theme";
 
-export const Container = styled.div`
+export const Container = styled.main`
+  padding 0 40px;
+`;
+
+export const Content = styled.div`
   display: grid;
   grid-template-columns: 20% 80%;
   color: ${grey};

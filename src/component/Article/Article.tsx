@@ -8,29 +8,26 @@ import {
   Title,
   Date,
 } from "./Article.styles";
+import placeholderUrl from "../../images/placeholder.jpg";
+import { Moment } from "moment";
 
 interface ArticleProps {
-  imageUrl: string;
+  image: string;
   title: string;
-  date: string;
+  date: Moment;
   content: string;
 }
 
-export const Article: FC<ArticleProps> = ({
-  imageUrl,
-  title,
-  date,
-  content,
-}) => {
+export const Article: FC<ArticleProps> = ({ image, title, date, content }) => {
   return (
     <Container>
-      <div>{imageUrl && <ArticleImage src={imageUrl} />}</div>
+      <ArticleImage src={image ? image : placeholderUrl} />
       <Content>
         <Header>
           <Title>{title}</Title>
-          <Date>{date}</Date>
+          <Date>{date.format("D. MMM YYYY")}</Date>
         </Header>
-        <div>{content}</div>
+        <p>{content}</p>
       </Content>
     </Container>
   );

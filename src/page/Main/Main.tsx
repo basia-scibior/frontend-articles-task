@@ -1,44 +1,44 @@
 import * as React from "react";
 import { FC, useEffect, useState } from "react";
-import { Container, ErrorContainer } from "./Main.styles";
-import { Sidebar } from "../../component/Sidebar/Sidebar";
+import { Container, Content, ErrorContainer } from "./Main.styles";
+import { Filters } from "../../component/Filters/Filters";
 import { Article } from "../../models/Article";
 import { Article as SingleArticle } from "../../component/Article/Article";
 import { SortBar } from "../../component/SortBar/SortBar";
 import { ArticlesApi } from "../../api/articles";
 import { Category } from "../../models/Category";
-import listArticles = ArticlesApi.listArticles;
+import { SortDirection } from "../../models/SortDirection";
 
 export const MainPage: FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [hasError, setHasError] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
+  const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
 
   useEffect(() => {
     const categories =
       selectedCategories.length === 0
         ? [Category.fashion, Category.sport]
         : selectedCategories;
-    listArticles(categories)
+    ArticlesApi.listArticles(categories)
       .then((articles) => setArticles(articles))
       .catch((error) => setHasError(true));
   }, [selectedCategories]);
 
-  console.log(articles);
+  const sortDates = (articleA: Article, articleB: Article) =>
+    sortDirection === "asc"
+      ? articleA.date.unix() - articleB.date.unix()
+      : articleB.date.unix() - articleA.date.unix();
+
+  const sortedArticles = [...articles].sort(sortDates);
 
   return (
-    <div>
-      <SortBar
-        onSort={() =>
-          setArticles(
-            articles.sort((articleA, articleB) => articleA.date - articleB.date)
-          )
-        }
-      />
-      <Container>
-        <Sidebar
+    <Container>
+      <SortBar onChangeDirection={setSortDirection} direction={sortDirection} />
+      <Content>
+        <Filters
           selectedCategories={selectedCategories}
-          setSelectedCategories={setSelectedCategories}
+          onChangeSelectedCategories={setSelectedCategories}
         />
         <div>
           {hasError && (
@@ -47,17 +47,17 @@ export const MainPage: FC = () => {
             </ErrorContainer>
           )}
           {!hasError &&
-            articles.map((article) => (
+            sortedArticles.map((article) => (
               <SingleArticle
                 key={article.id}
-                imageUrl={article.image}
+                image={article.image}
                 content={article.preamble}
                 date={article.date}
                 title={article.title}
               />
             ))}
         </div>
-      </Container>
-    </div>
+      </Content>
+    </Container>
   );
 };
